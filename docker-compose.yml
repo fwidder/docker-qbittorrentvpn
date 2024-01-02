@@ -11,6 +11,8 @@ services:
       - VPN_TYPE=${VPN_TYPE}
       - LAN_NETWORK=${LAN_NETWORK}
       - NAME_SERVERS=${NAME_SERVERS}
+      - VPN_USERNAME=${VPN_USERNAME}
+      - VPN_PASSWORD=${VPN_PASSWORD}
     ports:
       - "8282:8080"
     cap_add:
