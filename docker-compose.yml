@@ -6,6 +6,7 @@ services:
     volumes:
       - ${CONFIG_PATH}:/config
       - ${DOWNLOADS_PATH}:/downloads
+      - /dev/net/tun:/dev/net/tun
     environment:
       - VPN_ENABLED=${VPN_ENABLED}
       - VPN_TYPE=${VPN_TYPE}
