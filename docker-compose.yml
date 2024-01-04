@@ -6,6 +6,8 @@ services:
     volumes:
       - ${CONFIG_PATH}:/config
       - ${DOWNLOADS_PATH}:/downloads
+      - ${DOWNLOADS_MOVIES_PATH}:/downloads/movies
+      - ${DOWNLOADS_TV_PATH}:/downloads/tv
       - /dev/net/tun:/dev/net/tun
     environment:
       - VPN_ENABLED=${VPN_ENABLED}
