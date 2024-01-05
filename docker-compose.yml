@@ -8,6 +8,7 @@ services:
       - ${DOWNLOADS_PATH}:/downloads
       - ${DOWNLOADS_MOVIES_PATH}:/downloads/movies
       - ${DOWNLOADS_TV_PATH}:/downloads/tv
+      - ${DOWNLOADS_TORRENT_FILES}:/downloads/torrentfiles
       - /dev/net/tun:/dev/net/tun
     environment:
       - VPN_ENABLED=${VPN_ENABLED}
