@@ -35,7 +35,6 @@ RUN apt update \
     && rm -rf \
     /var/lib/apt/lists/* \
     /tmp/* \
-    /var/tmp/*
 
 # Install Ninja
 RUN apt update \
@@ -62,7 +61,6 @@ RUN apt update \
     && rm -rf \
     /var/lib/apt/lists/* \
     /tmp/* \
-    /var/tmp/*
 
 # Install cmake
 RUN apt update \
@@ -86,7 +84,6 @@ RUN apt update \
     && rm -rf \
     /var/lib/apt/lists/* \
     /tmp/* \
-    /var/tmp/*
 
 # Compile and install libtorrent-rasterbar
 RUN apt update \
@@ -120,7 +117,6 @@ RUN apt update \
     && rm -rf \
     /var/lib/apt/lists/* \
     /tmp/* \
-    /var/tmp/*
 
 # Compile and install qBittorrent
 RUN apt update \
@@ -162,7 +158,6 @@ RUN apt update \
     && rm -rf \
     /var/lib/apt/lists/* \
     /tmp/* \
-    /var/tmp/*
 
 # Install WireGuard and some other dependencies some of the scripts in the container rely on.
 RUN echo "deb http://deb.debian.org/debian/ unstable main" > /etc/apt/sources.list.d/unstable-wireguard.list \
@@ -190,7 +185,6 @@ RUN echo "deb http://deb.debian.org/debian/ unstable main" > /etc/apt/sources.li
     && rm -rf \
     /var/lib/apt/lists/* \
     /tmp/* \
-    /var/tmp/*
 
 # Install (un)compressing tools like unrar, 7z, unzip and zip
 RUN echo "deb http://deb.debian.org/debian/ bullseye non-free" > /etc/apt/sources.list.d/non-free-unrar.list \
@@ -207,7 +201,6 @@ RUN echo "deb http://deb.debian.org/debian/ bullseye non-free" > /etc/apt/source
     && rm -rf \
     /var/lib/apt/lists/* \
     /tmp/* \
-    /var/tmp/*
 
 # Remove src_valid_mark from wg-quick
 RUN sed -i /net\.ipv4\.conf\.all\.src_valid_mark/d `which wg-quick`
