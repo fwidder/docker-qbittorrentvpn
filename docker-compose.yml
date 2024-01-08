@@ -1,8 +1,7 @@
 version: '3'
 services:
-  qbittorrentvpn:
-    build: .
-    container_name: qbittorrentvpn
+  app:
+    image: 'fitchmultz/qbittorrentvpn:latest'
     volumes:
       - ${CONFIG_PATH}:/config
       - ${DOWNLOADS_PATH}:/downloads
