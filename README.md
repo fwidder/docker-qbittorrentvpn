@@ -42,6 +42,13 @@ Docker container which runs the latest [qBittorrent](https://github.com/qbittorr
 |`INSTALL_PYTHON3`| No |Set this to `yes` to let the container install Python3.|`INSTALL_PYTHON3=yes`|`no`|
 |`ADDITIONAL_PORTS`| No |Adding a comma delimited list of ports will allow these ports via the iptables script.|`ADDITIONAL_PORTS=1234,8112`||
 
+Additional variables added. Will rework fomatting later. Example for docker-compose.yml below.
+      - ${DOWNLOADS_PATH}:/downloads
+      - ${DOWNLOADS_MOVIES_PATH}:/downloads/movies
+      - ${DOWNLOADS_TV_PATH}:/downloads/tv
+      - ${DOWNLOADS_MUSIC_PATH}:/downloads/music
+      - ${DOWNLOADS_TORRENT_FILES}:/downloads/torrentfiles
+
 ## Volumes
 | Volume | Required | Function | Example |
 |----------|----------|----------|----------|
