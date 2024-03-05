@@ -8,9 +8,6 @@ services:
       - ${DOWNLOADS_MOVIES_PATH}:/downloads/movies
       - ${DOWNLOADS_TV_PATH}:/downloads/tv
       - ${DOWNLOADS_MUSIC_PATH}:/downloads/music
-      - ${DOWNLOADS_MOVIES_HDD_PATH}:/downloads/movies-hdd
-      - ${DOWNLOADS_TV_HDD_PATH}:/downloads/tv-hdd
-      - ${DOWNLOADS_MUSIC_HDD_PATH}:/downloads/music-hdd
       - ${DOWNLOADS_TORRENT_FILES}:/downloads/torrentfiles
       - /dev/net/tun:/dev/net/tun
     environment:
