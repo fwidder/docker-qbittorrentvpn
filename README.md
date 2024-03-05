@@ -63,14 +63,10 @@ Docker container which runs the latest [qBittorrent](https://github.com/qbittorr
 | `8999` | UDP | Yes | qBittorrent UDP Listening Port | `8999:8999/udp`|
 
 # Access the WebUI
-Access https://IPADDRESS:PORT from a browser on the same network. (for example: https://192.168.0.90:8080)
+Access https://IPADDRESS:PORT from a browser on the same network. (for example: https://192.168.0.90:8280)
 
 ## Default Credentials
-
-| Credential | Default Value |
-|----------|----------|
-|`username`| `admin` |
-|`password`| `adminadmin` |
+Default username is `admin`. Password is generated at first startup and can be found in the container logs. The password can be changed from the WebUI after logging in.
 
 # How to use WireGuard 
 The container will fail to boot if `VPN_ENABLED` is set and there is no valid .conf file present in the /config/wireguard directory. Drop a .conf file from your VPN provider into /config/wireguard and start the container again. The file must have the name `wg0.conf`, or it will fail to start.
