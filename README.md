@@ -40,14 +40,14 @@ Docker container which runs the latest [qBittorrent](https://github.com/qbittorr
 |`HEALTH_CHECK_AMOUNT`| No |The amount of pings that get send when checking for connection.|`HEALTH_CHECK_AMOUNT=10`|`1`|
 |`RESTART_CONTAINER`| No |Set to `no` to **disable** the automatic restart when the network is possibly down.|`RESTART_CONTAINER=yes`|`yes`|
 |`INSTALL_PYTHON3`| No |Set this to `yes` to let the container install Python3.|`INSTALL_PYTHON3=yes`|`no`|
-|`ADDITIONAL_PORTS`| No |Adding a comma delimited list of ports will allow these ports via the iptables script.|`ADDITIONAL_PORTS=1234,8112`||
+|`ADDITIONAL_PORTS`| No |Adding a comma delimited list of ports will allow these ports via the iptables script.|`ADDITIONAL_PORTS=1234,8112`|
+|`DOWNLOADS_PATH`| Yes |Location on the host OS where torrents will be stored |`/d/PlexMedia`|`none`|
+|`DOWNLOADS_MOVIES_PATH`| No | |`/d/PlexMedia/Movies`||
+|`DOWNLOADS_TV_PATH`| No | |`/d/PlexMedia/TV`||
+|`DOWNLOADS_MUSIC_PATH`| No | |`/d/PlexMedia/Music`||
+|`DOWNLOADS_TORRENT_FILES`| No |Location to store .torrent files to track where files originated |`/d/PlexMedia/TorrentFiles`|||
 
-Additional variables added. Will rework fomatting later. Example for docker-compose.yml below.
-      - ${DOWNLOADS_PATH}:/downloads
-      - ${DOWNLOADS_MOVIES_PATH}:/downloads/movies
-      - ${DOWNLOADS_TV_PATH}:/downloads/tv
-      - ${DOWNLOADS_MUSIC_PATH}:/downloads/music
-      - ${DOWNLOADS_TORRENT_FILES}:/downloads/torrentfiles
+
 
 ## Volumes
 | Volume | Required | Function | Example |
