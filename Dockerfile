@@ -1,5 +1,5 @@
 # qBittorrent, OpenVPN and WireGuard, qbittorrentvpn
-FROM debian:bullseye-slim
+FROM debian:bookworm-slim
 
 WORKDIR /opt
 
@@ -137,12 +137,13 @@ RUN apt update \
     qttools5-dev \
     qtbase5-private-dev \
     zlib1g-dev \
-    && QBITTORRENT_RELEASE=$(curl -sX GET "https://api.github.com/repos/qBittorrent/qBittorrent/tags" | jq '.[] | select(.name | index ("alpha") | not) | select(.name | index ("beta") | not) | select(.name | index ("rc") | not) | .name' | head -n 1 | tr -d '"') \
+    # && QBITTORRENT_RELEASE=$(curl -sX GET "https://api.github.com/repos/qBittorrent/qBittorrent/tags" | jq '.[] | select(.name | index ("alpha") | not) | select(.name | index ("beta") | not) | select(.name | index ("rc") | not) | .name' | head -n 1 | tr -d '"') \
+    && QBITTORRENT_RELEASE="release-4.6.7" \
     && curl -o /opt/qBittorrent-${QBITTORRENT_RELEASE}.tar.gz -L "https://github.com/qbittorrent/qBittorrent/archive/${QBITTORRENT_RELEASE}.tar.gz" \
     && tar -xzf /opt/qBittorrent-${QBITTORRENT_RELEASE}.tar.gz \
     && rm /opt/qBittorrent-${QBITTORRENT_RELEASE}.tar.gz \
     && cd /opt/qBittorrent-${QBITTORRENT_RELEASE} \
-    && cmake -G Ninja -B build -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/usr/local -DGUI=OFF -DCMAKE_CXX_STANDARD=17 \
+    && cmake -G Ninja -B build -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/usr/local -DGUI=OFF -DCMAKE_CXX_STANDARD=17 -DOPENSSL_ROOT_DIR=/usr/lib/x86_64-linux-gnu \
     && cmake --build build --parallel $(nproc) \
     && cmake --install build \
     && cd /opt \
@@ -177,11 +178,12 @@ RUN echo "deb http://deb.debian.org/debian/ unstable main" > /etc/apt/sources.li
     inetutils-ping \
     ipcalc \
     iptables \
+    iproute2 \
     kmod \
     libqt5network5 \
     libqt5xml5 \
     libqt5sql5 \
-    libssl1.1 \
+    libssl3 \
     moreutils \
     net-tools \
     openresolv \
@@ -195,7 +197,7 @@ RUN echo "deb http://deb.debian.org/debian/ unstable main" > /etc/apt/sources.li
     /tmp/* \
     /var/tmp/*
 
-# Install (un)compressing tools like unrar, 7z, unzip and zip
+# Install tools - unrar, 7z, unzip, zip, curl, wget
 RUN echo "deb http://deb.debian.org/debian/ bullseye non-free" > /etc/apt/sources.list.d/non-free-unrar.list \
     && printf 'Package: *\nPin: release a=non-free\nPin-Priority: 150\n' > /etc/apt/preferences.d/limit-non-free \
     && apt update \
@@ -205,6 +207,8 @@ RUN echo "deb http://deb.debian.org/debian/ bullseye non-free" > /etc/apt/source
     p7zip-full \
     unzip \
     zip \
+    curl \
+    wget \
     && apt-get clean \
     && apt --purge autoremove -y \
     && rm -rf \

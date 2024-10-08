@@ -1,0 +1,46 @@
+kind: pipeline
+name: default
+type: docker
+
+steps:
+  - name: build & push gitea + dockerhub
+    image: docker:dind
+    volumes:
+      - name: dockersock
+        path: /var/run
+    environment:
+      DOCKER_GITEA_PASSWORD:
+        from_secret: GITEA_PASSWORD
+      DOCKER_GITEA_USERNAME:
+        from_secret: GITEA_USER
+      DOCKER_GITEA_HOST:
+        from_secret: GITEA_REG_HOST
+      DOCKER_HUB_PASSWORD:
+        from_secret: DOCKERHUB_PASSWORD
+      DOCKER_HUB_USERNAME:
+        from_secret: DOCKERHUB_USER
+    commands:
+      - sleep 5 # give docker enough time to start
+      - echo $DOCKER_GITEA_PASSWORD | docker login --username $DOCKER_GITEA_USERNAME --password-stdin $DOCKER_GITEA_HOST
+      - echo $DOCKER_HUB_PASSWORD | docker login --username $DOCKER_HUB_USERNAME --password-stdin
+      - DOCKER_BUILDKIT=1 docker build -t $DOCKER_GITEA_HOST/$DOCKER_GITEA_USERNAME/qbittorrentvpn:latest -t $DOCKER_HUB_USERNAME/qbittorrentvpn:latest -t $DOCKER_GITEA_HOST/$DOCKER_GITEA_USERNAME/qbittorrentvpn:$(date '+%Y-%m-%d') -t $DOCKER_HUB_USERNAME/qbittorrentvpn:$(date '+%Y-%m-%d') .
+      - docker push --all-tags $DOCKER_GITEA_HOST/$DOCKER_GITEA_USERNAME/qbittorrentvpn
+      - docker push --all-tags $DOCKER_HUB_USERNAME/qbittorrentvpn
+
+services:
+  - name: docker
+    image: docker:dind
+    privileged: true
+    volumes:
+      - name: dockersock
+        path: /var/run
+
+volumes:
+  - name: dockersock
+    temp: {}
+
+trigger:
+  branch:
+    - main
+  event:
+    - push
