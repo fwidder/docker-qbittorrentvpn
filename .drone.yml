@@ -23,7 +23,7 @@ steps:
       - sleep 5 # give docker enough time to start
       - echo $DOCKER_GITEA_PASSWORD | docker login --username $DOCKER_GITEA_USERNAME --password-stdin $DOCKER_GITEA_HOST
       - echo $DOCKER_HUB_PASSWORD | docker login --username $DOCKER_HUB_USERNAME --password-stdin
-      - DOCKER_BUILDKIT=1 docker build -t $DOCKER_GITEA_HOST/$DOCKER_GITEA_USERNAME/qbittorrentvpn:latest -t $DOCKER_HUB_USERNAME/qbittorrentvpn:latest -t $DOCKER_GITEA_HOST/$DOCKER_GITEA_USERNAME/qbittorrentvpn:$(date '+%Y-%m-%d') -t $DOCKER_HUB_USERNAME/qbittorrentvpn:$(date '+%Y-%m-%d') .
+      - DOCKER_BUILDKIT=1 docker build --no-cache -t $DOCKER_GITEA_HOST/$DOCKER_GITEA_USERNAME/qbittorrentvpn:latest -t $DOCKER_HUB_USERNAME/qbittorrentvpn:latest -t $DOCKER_GITEA_HOST/$DOCKER_GITEA_USERNAME/qbittorrentvpn:$(date '+%Y-%m-%d') -t $DOCKER_HUB_USERNAME/qbittorrentvpn:$(date '+%Y-%m-%d') .
       - docker push --all-tags $DOCKER_GITEA_HOST/$DOCKER_GITEA_USERNAME/qbittorrentvpn
       - docker push --all-tags $DOCKER_HUB_USERNAME/qbittorrentvpn
 
