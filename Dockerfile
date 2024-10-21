@@ -230,7 +230,7 @@ VOLUME /config /downloads
 
 ADD openvpn/ /etc/openvpn/
 ADD qbittorrent/ /etc/qbittorrent/
-ADD vuetorrent/ /vuetorrent/
+ADD ./vuetorrent/ /etc/vuetorrent/
 
 RUN chmod +x /etc/qbittorrent/*.sh /etc/qbittorrent/*.init /etc/openvpn/*.sh
 
