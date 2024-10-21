@@ -216,6 +216,13 @@ RUN echo "deb http://deb.debian.org/debian/ bullseye non-free" > /etc/apt/source
     /tmp/* \
     /var/tmp/*
 
+# Add Vuetorrent UI https://github.com/VueTorrent/VueTorrent
+RUN VERSION=$(basename $(curl -Ls -o /dev/null -w %{url_effective} https://github.com/VueTorrent/VueTorrent/releases/latest)) \
+    && URL="https://github.com/VueTorrent/VueTorrent/releases/download/$VERSION/vuetorrent.zip" \
+    && curl -Lso ./vuetorrent.zip "$URL" \
+    && mkdir ./vuetorrent \
+    && unzip ./vuetorrent.zip -d .
+
 # Remove src_valid_mark from wg-quick
 RUN sed -i /net\.ipv4\.conf\.all\.src_valid_mark/d `which wg-quick`
 
