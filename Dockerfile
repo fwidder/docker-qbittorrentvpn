@@ -222,6 +222,7 @@ RUN VERSION=$(basename $(curl -Ls -o /dev/null -w %{url_effective} https://githu
     && curl -Lso ./vuetorrent.zip "$URL" \
     && mkdir ./vuetorrent \
     && unzip ./vuetorrent.zip -d .
+    && ls .
 
 # Remove src_valid_mark from wg-quick
 RUN sed -i /net\.ipv4\.conf\.all\.src_valid_mark/d `which wg-quick`
