@@ -221,7 +221,7 @@ RUN VERSION=$(basename $(curl -Ls -o /dev/null -w %{url_effective} https://githu
     && URL="https://github.com/VueTorrent/VueTorrent/releases/download/$VERSION/vuetorrent.zip" \
     && curl -Lso ./vuetorrent.zip "$URL" \
     && mkdir ./vuetorrent \
-    && unzip ./vuetorrent.zip -d .
+    && unzip ./vuetorrent.zip -d . \
     && ls .
 
 # Remove src_valid_mark from wg-quick
