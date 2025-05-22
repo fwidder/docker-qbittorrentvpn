@@ -21,11 +21,9 @@ steps:
         from_secret: DOCKERHUB_USER
     commands:
       - sleep 5 # give docker enough time to start
-      - echo $DOCKER_GITEA_PASSWORD | docker login --username $DOCKER_GITEA_USERNAME --password-stdin $DOCKER_GITEA_HOST
-      - echo $DOCKER_HUB_PASSWORD | docker login --username $DOCKER_HUB_USERNAME --password-stdin
+      - docker login -u $DOCKER_GITEA_USERNAME -p $DOCKER_GITEA_PASSWORD $DOCKER_GITEA_HOST
       - DOCKER_BUILDKIT=1 docker build --pull --no-cache -t $DOCKER_GITEA_HOST/$DOCKER_GITEA_USERNAME/qbittorrentvpn:latest -t $DOCKER_HUB_USERNAME/qbittorrentvpn:latest -t $DOCKER_GITEA_HOST/$DOCKER_GITEA_USERNAME/qbittorrentvpn:$(date '+%Y-%m-%d') -t $DOCKER_HUB_USERNAME/qbittorrentvpn:$(date '+%Y-%m-%d') .
       - docker push --all-tags $DOCKER_GITEA_HOST/$DOCKER_GITEA_USERNAME/qbittorrentvpn
-      - docker push --all-tags $DOCKER_HUB_USERNAME/qbittorrentvpn
 
 services:
   - name: docker
