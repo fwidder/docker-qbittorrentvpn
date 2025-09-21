@@ -16,8 +16,6 @@ RUN apt update \
     ca-certificates \
     g++ \
     libxml2-utils \
-    && # Fixed Boost version \
-    && # Fixed Boost version \
     && curl -o /opt/boost_1_84_0.tar.gz -L https://sourceforge.net/projects/boost/files/boost/1.84.0/boost_1_84_0.tar.gz/download \
     && tar -xzf /opt/boost_1_84_0.tar.gz -C /opt \
     && cd /opt/boost_1_84_0 \
